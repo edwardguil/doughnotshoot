@@ -22,7 +22,6 @@ func _physics_process(delta) -> void:
 	if Input.is_action_just_pressed("change_weapon"):
 		$Weapon.ChangeWeapon()
 	if Input.is_action_just_pressed("fire"):
-		print("Player position", global_position)
 		$Weapon.FireWeapon(mouse_position)
 
 

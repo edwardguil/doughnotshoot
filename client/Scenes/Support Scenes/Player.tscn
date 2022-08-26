@@ -66,7 +66,7 @@ hframes = 9
 vframes = 13
 frame = 9
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Player"]]
 position = Vector2( -1, -1.75 )
 shape = SubResource( 1 )
 
@@ -74,9 +74,6 @@ shape = SubResource( 1 )
 anims/RESET = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/walk = SubResource( 2 )
-
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
 
 [node name="Weapon" parent="." instance=ExtResource( 3 )]
 position = Vector2( -1, -3 )

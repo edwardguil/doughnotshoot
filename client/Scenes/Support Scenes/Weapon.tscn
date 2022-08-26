@@ -19,6 +19,12 @@ vframes = 5
 [node name="Exit1" type="Position2D" parent="Gun1/Sprite1"]
 position = Vector2( 18, 1 )
 
+[node name="Exit2" type="Position2D" parent="Gun1/Sprite1"]
+position = Vector2( 18, 9 )
+
+[node name="Exit3" type="Position2D" parent="Gun1/Sprite1"]
+position = Vector2( 18, -6 )
+
 [node name="Gun2" type="Node2D" parent="."]
 visible = false
 
