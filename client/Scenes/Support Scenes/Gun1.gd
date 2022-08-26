@@ -5,6 +5,7 @@ var can_fire = true
 var fire_rate = 0.75
 
 func _ready():
+	$AnimationPlayer.play("idle")
 	$AnimationPlayer.playback_speed = 2.0
 
 func fire(mouse_position):
