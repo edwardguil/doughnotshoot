@@ -14,20 +14,23 @@ func _physics_process(delta) -> void:
 	var y_input = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	
 	velocity = Vector2(x_input, y_input).normalized()
-	handle_input(velocity)
+	var mouse_position = get_global_mouse_position()
+	handle_animation(velocity, mouse_position)
 	move_and_slide(velocity * SPEED)
-	
+	$Weapon.look_at(mouse_position)
 
 
-func handle_input(velocity) -> void:
-	if velocity.x < 0:
-		$AnimationPlayer.play("walk")
-		$Sprite.flip_h = true
-	elif velocity.x > 0:
-		$AnimationPlayer.play("walk")
-		$Sprite.flip_h = false
-	elif velocity.y != 0:
+func handle_animation(velocity, mouse_position) -> void:
+	if velocity.x != 0 or velocity.y != 0:
 		$AnimationPlayer.play("walk")
 	else:
 		$AnimationPlayer.play("idle")
-	
+			
+	if mouse_position.x < global_position.x:
+		$Sprite.flip_h = true
+		$Weapon.position = Vector2(1, -3)
+		$Weapon.FlipSprite(true)
+	else:
+		$Sprite.flip_h = false
+		$Weapon.position = Vector2(-1, -3)
+		$Weapon.FlipSprite(false)
