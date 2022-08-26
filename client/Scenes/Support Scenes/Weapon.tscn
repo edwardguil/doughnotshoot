@@ -17,7 +17,7 @@ hframes = 4
 vframes = 5
 
 [node name="Exit" type="Position2D" parent="Gun1"]
-position = Vector2( 19, 0 )
+position = Vector2( 22, 0 )
 
 [node name="Gun2" type="Node2D" parent="."]
 visible = false
