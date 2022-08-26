@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var SPEED = 300
 var velocity = Vector2(0, 0)
-
+var mouse_position = Vector2(0, 0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -14,10 +14,13 @@ func _physics_process(delta) -> void:
 	var y_input = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	
 	velocity = Vector2(x_input, y_input).normalized()
-	var mouse_position = get_global_mouse_position()
+	mouse_position = get_global_mouse_position()
 	handle_animation(velocity, mouse_position)
-	move_and_slide(velocity * SPEED)
 	$Weapon.look_at(mouse_position)
+	move_and_slide(velocity * SPEED)
+	
+	if Input.is_action_just_pressed("change_weapon"):
+		$Weapon.ChangeWeapon()
 
 
 func handle_animation(velocity, mouse_position) -> void:
