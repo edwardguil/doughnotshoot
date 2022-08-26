@@ -21,6 +21,9 @@ func _physics_process(delta) -> void:
 	
 	if Input.is_action_just_pressed("change_weapon"):
 		$Weapon.ChangeWeapon()
+	if Input.is_action_just_pressed("fire"):
+		print("Player position", global_position)
+		$Weapon.FireWeapon(mouse_position)
 
 
 func handle_animation(velocity, mouse_position) -> void:
@@ -31,9 +34,7 @@ func handle_animation(velocity, mouse_position) -> void:
 			
 	if mouse_position.x < global_position.x:
 		$Sprite.flip_h = true
-		$Weapon.position = Vector2(1, -3)
 		$Weapon.FlipSprite(true)
 	else:
 		$Sprite.flip_h = false
-		$Weapon.position = Vector2(-1, -3)
 		$Weapon.FlipSprite(false)
