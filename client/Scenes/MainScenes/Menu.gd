@@ -12,3 +12,10 @@ func _on_FindGame_pressed():
 
 func _on_TestGame_pressed():
 	get_tree().change_scene("res://Scenes/MainScenes/Level.tscn")
+
+func SetQueueStatus(new_status):
+	if new_status == 1:
+		# Show waiting screen
+		pass
+	elif new_status == 2:
+		GameController.NewGame()

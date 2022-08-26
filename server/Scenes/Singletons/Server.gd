@@ -3,6 +3,8 @@ extends Node
 var network = NetworkedMultiplayerENet.new()
 var port = 1989;
 var max_players = 100;
+var players_states = {}
+var players_games = {}
 
 func _ready():
 	StartServer()
@@ -22,8 +24,38 @@ func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
 	if get_node("Queue").IsInQueue(player_id):
 		get_node("Queue").RemoveFromQueue(player_id)
+		if (players_games.has(player_id)):
+			var gameId = players_games.get(player_id)
+			get_node(gameId).RemovePlayer(player_id)
+			players_games.erase(player_id)
+		if players_states.has(player_id):
+			players_states.erase(player_id)
+
+remote func RecievePlayerState(player_state):
+	var player_id = get_tree().get_rpc_sender_id()
+	if (players_games.has(player_id)):
+		if players_states.has(player_id):
+			if players_states[player_id]["T"] < player_state["T"]:
+				players_states[player_id] = player_state
+		else:
+			players_states[player_id] = player_state
+
+func SetQueueStatus(player_id, status):
+	rpc_id(player_id, "SetQueueStatus", status)
+
+		
+func SendWorldState(players, world_state):
+	for player in players:
+		rpc_unreliable_id(player, "RecieveWorldState", world_state)
+
+func SpawnNewPlayers(player_id, players, positions):
+	rpc_id(player_id, "SpawnNewPlayers", players, positions)
+	
+func DespawnPlayer(player_id, player):
+	rpc_id(player_id, "DespawnPlayer", player)
 
 remote func JoinQueue():
 	var player_id = get_tree().get_rpc_sender_id()
 	if !get_node("Queue").IsInQueue(player_id):
 		get_node("Queue").AddPlayer(player_id)
+	SetQueueStatus(player_id, 1)
