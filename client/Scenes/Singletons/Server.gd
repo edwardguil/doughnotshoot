@@ -24,3 +24,19 @@ func _OnConnectionSucceeded():
 
 func JoinQueue():
 	rpc_id(1, "JoinQueue")
+	
+remote func SetQueueStatus(status):
+	#instance_from_id(requester).SetQueueStatus(success)
+	get_node("/root/Menu").SetQueueStatus(status)
+	
+remote func SpawnNewPlayers(players, positions):
+	GameController.SpawnPlayers(players, positions)
+
+remote func DespawnPlayer(player_id):
+	GameController.DespawnPlayers(player_id)
+
+func SendPlayerState(player_state):
+	rpc_unreliable_id(1, "RecievePlayerState", player_state)
+
+remote func RecieveWorldState(world_state):
+	GameController.UpdateWorldState(world_state)

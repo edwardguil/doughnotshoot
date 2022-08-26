@@ -3,6 +3,7 @@ extends KinematicBody2D
 var SPEED = 300
 var velocity = Vector2(0, 0)
 var mouse_position = Vector2(0, 0)
+var player_state = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -23,7 +24,9 @@ func _physics_process(delta) -> void:
 		$Weapon.ChangeWeapon()
 	if Input.is_action_just_pressed("fire"):
 		$Weapon.FireWeapon(mouse_position)
-
+		
+	DefinePlayerState(mouse_position)
+	
 
 func handle_animation(velocity, mouse_position) -> void:
 	if velocity.x != 0 or velocity.y != 0:
@@ -37,3 +40,7 @@ func handle_animation(velocity, mouse_position) -> void:
 	else:
 		$Sprite.flip_h = false
 		$Weapon.FlipSprite(false)
+		
+func DefinePlayerState(mouse_position):
+	player_state = {"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position}
+	Server.SendPlayerState(player_state)

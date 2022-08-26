@@ -19,6 +19,8 @@ func CreateGame():
 	for i in (PLAYERS_PER_GAME):
 		var player = queue.pop_front()
 		game.AddPlayer(player)
+		get_parent().SetQueueStatus(player, 2)
+	game.StartGame()
 
 func AddPlayer(player_id):
 	queue.append(player_id)
