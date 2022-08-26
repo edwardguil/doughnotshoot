@@ -14,6 +14,10 @@ config/name="ClientGame"
 run/main_scene="res://Scenes/MainScenes/Level.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Server="*res://Scenes/Singletons/Server.gd"
+
 [global]
 
 port=false
