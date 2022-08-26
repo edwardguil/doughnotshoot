@@ -20,3 +20,10 @@ func _Peer_Connected(player_id):
 	
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
+	if get_node("Queue").IsInQueue(player_id):
+		get_node("Queue").RemoveFromQueue(player_id)
+
+remote func JoinQueue():
+	var player_id = get_tree().get_rpc_sender_id()
+	if !get_node("Queue").IsInQueue(player_id):
+		get_node("Queue").AddPlayer(player_id)

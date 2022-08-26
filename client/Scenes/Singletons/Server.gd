@@ -20,3 +20,7 @@ func _OnConnectedFailed():
 	
 func _OnConnectionSucceeded():
 	print("Sucessfully connected")
+
+
+func JoinQueue():
+	rpc_id(1, "JoinQueue")
