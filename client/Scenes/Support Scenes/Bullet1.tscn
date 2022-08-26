@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 scale = Vector2( 0.431818, 0.431818 )
 texture = ExtResource( 2 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Bullets"]]
 position = Vector2( -0.4, 0 )
 scale = Vector2( 0.95, 0.95 )
 shape = SubResource( 1 )
