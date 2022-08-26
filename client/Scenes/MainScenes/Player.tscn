@@ -4,7 +4,7 @@
 [ext_resource path="res://Scenes/MainScenes/Player.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 13 )
+extents = Vector2( 8, 19.25 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -58,17 +58,20 @@ tracks/0/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -10 )
+position = Vector2( 0, -17 )
+scale = Vector2( 1.4375, 1.4375 )
 texture = ExtResource( 1 )
 hframes = 9
 vframes = 13
 frame = 9
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2( -1, -1.75 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
 anims/idle = SubResource( 4 )
 anims/walk = SubResource( 2 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
