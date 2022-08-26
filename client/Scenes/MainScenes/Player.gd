@@ -14,4 +14,14 @@ func _physics_process(delta) -> void:
 	var y_input = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 	
 	velocity = Vector2(x_input, y_input).normalized()
+	handle_input(x_input, y_input)
 	move_and_slide(velocity * SPEED)
+	
+
+
+func handle_input(x_input, y_input):
+	if x_input != 0 or y_input != 0:
+		$AnimationPlayer.play("walk")
+	else:
+		$AnimationPlayer.play("idle")
+	
