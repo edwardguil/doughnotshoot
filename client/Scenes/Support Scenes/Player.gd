@@ -30,7 +30,7 @@ func handle_animation(velocity, mouse_position) -> void:
 		$AnimationPlayer.play("walk")
 	else:
 		$AnimationPlayer.play("idle")
-			
+		
 	if mouse_position.x < global_position.x:
 		$Sprite.flip_h = true
 		$Weapon.FlipSprite(true)

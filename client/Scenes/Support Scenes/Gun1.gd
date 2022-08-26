@@ -1,22 +1,29 @@
 extends Node2D
 
-var BULLET_PATH = preload("res://Scenes/Support Scenes/Bullet1.tscn")
+var BULLET_PATH = preload("res://Scenes/Support Scenes/Weapons/Bullet1.tscn")
+var can_fire = true
+var fire_rate = 0.75
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	$AnimationPlayer.playback_speed = 2.0
 
 func fire(mouse_position):
-	var bullet1 = BULLET_PATH.instance()
-	bullet1.position = $Sprite1/Exit1.global_position
-	bullet1.rotation = get_parent().rotation
-	var bullet2 = BULLET_PATH.instance()
-	bullet2.position = $Sprite1/Exit1.global_position
-	bullet2.rotation = get_parent().rotation + get_parent().rotation * 0.4
-	var bullet3 = BULLET_PATH.instance()
-	bullet3.position = $Sprite1/Exit1.global_position
-	bullet3.rotation = get_parent().rotation - get_parent().rotation * 0.4
-	
-	get_parent().get_parent().get_parent().add_child(bullet1)
-	get_parent().get_parent().get_parent().add_child(bullet2)
-	get_parent().get_parent().get_parent().add_child(bullet3)
+	if can_fire:
+		can_fire = false
+		var bullet1 = BULLET_PATH.instance()
+		bullet1.position = $Sprite/Exit1.global_position
+		bullet1.rotation = get_parent().rotation
+		var bullet2 = BULLET_PATH.instance()
+		bullet2.position = $Sprite/Exit2.global_position
+		bullet2.rotation = get_parent().rotation
+		var bullet3 = BULLET_PATH.instance()
+		bullet3.position = $Sprite/Exit3.global_position
+		bullet3.rotation = get_parent().rotation
+		
+		
+		$AnimationPlayer.play("fire")
+		get_parent().get_parent().get_parent().add_child(bullet1)
+		get_parent().get_parent().get_parent().add_child(bullet2)
+		get_parent().get_parent().get_parent().add_child(bullet3)
+		yield(get_tree().create_timer(fire_rate), "timeout")
+		can_fire = true
