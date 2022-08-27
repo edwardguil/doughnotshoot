@@ -6,6 +6,7 @@ const INTERPOLATION_OFFSET = 20 # In milliseconds, default 100
 
 var world_state_buffer = []
 var last_world_state = 0
+var in_game = 0
 
 func NewGame():
 	get_tree().change_scene("res://Scenes/MainScenes/Level.tscn")
@@ -20,18 +21,20 @@ func SpawnPlayers(players, positions):
 		var player_id = players[i]
 		var position = positions[i]
 		if get_tree().get_network_unique_id() == player_id:
-			new_player = CURRENT_PLAYER.instance()
-			new_player.position = position
-			get_tree().get_current_scene().add_child(new_player)
+			#new_player = CURRENT_PLAYER.instance()
+			#new_player.position = position
+			get_tree().get_current_scene().get_node("Player").position = position
+			#get_tree().get_current_scene().add_child(new_player, true)
 		else:
 			if not get_tree().get_current_scene().has_node(str(player_id)):
 				new_player = ENEMY_PLAYER.instance()
 				new_player.name = str(player_id)
 				new_player.position = position
-				get_tree().get_current_scene().add_child(new_player)
+				get_tree().get_current_scene().add_child(new_player, true)
 
 func DespawnPlayers(player_id):
 	yield(get_tree().create_timer(0.2), "timeout")
+	print(get_tree().get_current_scene().has_node(str(player_id)))
 	if get_tree().get_current_scene().has_node(str(player_id)):
 		get_tree().get_current_scene().get_node(str(player_id)).queue_free()
 
@@ -42,6 +45,7 @@ func UpdateWorldState(world_state):
 			
 func _physics_process(delta):
 	var render_time = Server.client_clock - INTERPOLATION_OFFSET
+
 	if world_state_buffer.size() > 1:
 		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
 			world_state_buffer.remove(0)

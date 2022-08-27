@@ -25,11 +25,6 @@ func ConnectToServer():
 	get_tree().set_network_peer(network)
 	network.connect("connection_failed", self, "_OnConnectionFailed")
 	network.connect("connection_succeeded", self, "_OnConnectionSucceeded")
-	var timer = Timer.new()
-	timer.wait_time = 0.5
-	timer.autostart = true
-	timer.connect("timeout", self, "DetermineLatency")
-	self.add_child(timer)
 
 remote func ReturnServerTime(server_time, client_time):
 	latency = (OS.get_system_time_msecs() - client_time) / 2
@@ -61,18 +56,28 @@ func _OnConnectedFailed():
 	
 func _OnConnectionSucceeded():
 	print("Sucessfully connected")
-
+	rpc_id(1, "FetchServerTime", OS.get_system_time_msecs())
+	var timer = Timer.new()
+	timer.wait_time = 0.5
+	timer.autostart = true
+	timer.connect("timeout", self, "DetermineLatency")
+	self.add_child(timer)
+	
 func JoinQueue():
 	rpc_id(1, "JoinQueue")
 	
 remote func SetQueueStatus(status):
 	#instance_from_id(requester).SetQueueStatus(success)
-	get_node("/root/Menu").SetQueueStatus(status)
+	print("Set QueStatus Called")
+	if get_tree().current_scene.has_method("SetQueueStatus"):
+		get_tree().current_scene.SetQueueStatus(status)
 	
 remote func SpawnNewPlayers(players, positions):
+	print("Spawn Players Called")
 	GameController.SpawnPlayers(players, positions)
 
 remote func DespawnPlayer(player_id):
+	print("Despawn Players Called")
 	GameController.DespawnPlayers(player_id)
 
 func SendPlayerState(player_state):
