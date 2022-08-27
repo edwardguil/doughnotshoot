@@ -2,6 +2,7 @@ extends Node
 
 var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
+#var ip = "10.89.200.159"
 var port = 1989
 var client_clock = 0
 var decimal_collector : float = 0

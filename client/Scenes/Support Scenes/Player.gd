@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-var SPEED = 300
+var SPEED = 600
 var velocity = Vector2(0, 0)
 var mouse_position = Vector2(0, 0)
 var player_state = {}
@@ -41,11 +41,34 @@ func handle_animation(velocity, mouse_position) -> void:
 		
 	if mouse_position.x < global_position.x:
 		$Frough.flip_h = true
-		$Weapon.FlipSprite(true)
+		if $Weapon.scale.y > 0:
+			$Weapon.scale.y = -$Weapon.scale.y 
+			$Weapon.position.x = -50
+			$Weapon.position.y = 20
+
 	else:
 		$Frough.flip_h = false
-		$Weapon.FlipSprite(false)
+		if $Weapon.scale.y < 0:
+			$Weapon.scale.y = -$Weapon.scale.y 
+			$Weapon.position.y = 10
+			$Weapon.position.x = 54
+
 		
 func DefinePlayerState(mouse_position):
 	player_state = {"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position}
 	Server.SendPlayerState(player_state)
+	
+func gotHit():
+	health = health - 1
+	if (health <= 0):
+		health = max_health
+		deaths = deaths + 1
+		respawn()
+		
+func respawn():
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var x = rng.randf_range(-450, 1500)
+	var y = rng.randf_range(-500, 1200)
+	position = Vector2(x, y)
+	

@@ -2,7 +2,7 @@ extends Node
 
 const ENEMY_PLAYER = preload("res://Scenes/Support Scenes/EnemyPlayer.tscn")
 const CURRENT_PLAYER =  preload("res://Scenes/Support Scenes/Player.tscn")
-const INTERPOLATION_OFFSET = 20 # In milliseconds, default 100
+const INTERPOLATION_OFFSET = 100 # In milliseconds, default 100
 
 var world_state_buffer = []
 var last_world_state = 0
