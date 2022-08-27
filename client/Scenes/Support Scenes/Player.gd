@@ -35,15 +35,15 @@ func _physics_process(delta) -> void:
 
 func handle_animation(velocity, mouse_position) -> void:
 	if velocity.x != 0 or velocity.y != 0:
-		$AnimationPlayer.play("walk")
+		$anim.play("wobbledown")
 	else:
-		$AnimationPlayer.play("idle")
+		$anim.stop()
 		
 	if mouse_position.x < global_position.x:
-		$Sprite.flip_h = true
+		$Frough.flip_h = true
 		$Weapon.FlipSprite(true)
 	else:
-		$Sprite.flip_h = false
+		$Frough.flip_h = false
 		$Weapon.FlipSprite(false)
 		
 func DefinePlayerState(mouse_position):
