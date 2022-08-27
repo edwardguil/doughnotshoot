@@ -7,6 +7,10 @@ func FireWeapon(mouse_position):
 	var current_weapon_node = get_node(weapons[current_weapon])
 	current_weapon_node.fire(mouse_position)
 
+func FireWeaponDontSend(mouse_position):
+	var current_weapon_node = get_node(weapons[current_weapon])
+	current_weapon_node.FireWeaponDontSend(mouse_position)
+	
 func ChangeWeapon():
 	get_node(weapons[current_weapon]).hide()
 	current_weapon = (current_weapon + 1) % len(weapons)

@@ -9,7 +9,7 @@ var last_world_state = 0
 var in_game = 0
 
 func NewGame():
-	get_tree().change_scene("res://Scenes/MainScenes/Level.tscn")
+	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
 	print("New Game Started")
 
 
@@ -18,6 +18,7 @@ func SpawnPlayers(players, positions):
 	yield(get_tree(), "idle_frame")
 	var new_player
 	for i in range(len(players)):
+		print(players[i])
 		var player_id = players[i]
 		var position = positions[i]
 		if get_tree().get_network_unique_id() == player_id:
@@ -80,3 +81,9 @@ func _physics_process(delta):
 					get_tree().get_current_scene().get_node(str(player)).MovePlayer(new_position, world_state_buffer[1]["Players"][player]["P"], new_rotation)
 				else:
 					SpawnPlayers([player], [world_state_buffer[2]["Players"][player]["P"]])
+
+func PerformShootAction(shoot_action):
+	for player in world_state_buffer[1]["Players"].keys():
+		if get_tree().get_current_scene().has_node(str(player)):
+			get_tree().get_current_scene().get_node(str(player)).ShootGun(shoot_action["R"])
+	

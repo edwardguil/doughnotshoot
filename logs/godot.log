@@ -1,0 +1,7 @@
+Godot Engine v3.4.5.stable.fedora.f9ac000d5 - https://godotengine.org
+OpenGL ES 3.0 Renderer: AMD RENOIR (DRM 3.46.0, 5.18.18-100.fc35.x86_64, LLVM 13.0.0)
+OpenGL ES Batching: ON
+ 
+ERROR: Condition "default_certs != nullptr" is true.
+   at: load_default_certificates (modules/mbedtls/crypto_mbedtls.cpp:314) - Condition "default_certs != nullptr" is true.
+Editing project: /home/zomombi/Projects/new/client (::home::zomombi::Projects::new::client)
