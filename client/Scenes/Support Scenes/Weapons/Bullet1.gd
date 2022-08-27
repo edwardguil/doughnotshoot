@@ -17,4 +17,5 @@ func SelfDestruct():
 
 func _on_Bullet_body_entered(body):
 	if !body.is_in_group("Bullets") or !body.is_in_group("Player"):
+		body.health = body.health - -1
 		self.hide()

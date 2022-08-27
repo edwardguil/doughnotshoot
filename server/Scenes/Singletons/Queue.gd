@@ -1,6 +1,6 @@
 extends Node
 
-const PLAYERS_PER_GAME = 1
+const PLAYERS_PER_GAME = 2
 
 var GAME_PATH = preload("res://Scenes/Instances/Game.tscn")
 var queue = []

@@ -35,10 +35,10 @@ margin_bottom = 68.0
 text = "Quit"
 
 [node name="TestGame" type="Button" parent="."]
-margin_left = 482.0
-margin_top = 192.0
-margin_right = 563.0
-margin_bottom = 212.0
+margin_left = 473.0
+margin_top = 193.0
+margin_right = 554.0
+margin_bottom = 213.0
 text = "Test Game"
 
 [connection signal="pressed" from="VBoxContainer/FindGame" to="." method="_on_FindGame_pressed"]
