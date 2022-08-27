@@ -1,8 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Assests/player.png" type="Texture" id=1]
-[ext_resource path="res://Scenes/Support Scenes/EnemyPlayer.gd" type="Script" id=2]
-[ext_resource path="res://Scenes/Support Scenes/Weapon.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -40,26 +38,19 @@ tracks/0/keys = {
 radius = 37.0
 height = 46.0
 
-[node name="EnemyPlayer" type="KinematicBody2D"]
-position = Vector2( 514, 302 )
-script = ExtResource( 2 )
-
-[node name="Weapon" parent="." instance=ExtResource( 3 )]
-position = Vector2( 49, 13 )
-scale = Vector2( 3, 3 )
-z_index = 7
+[node name="KinematicBody2D" type="KinematicBody2D"]
 
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 2.0
 anims/RESET = SubResource( 1 )
 anims/wobbledown = SubResource( 2 )
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2( 26.3607, 6.74342 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 6, -58 )
 shape = SubResource( 3 )
 
 [node name="Frough" type="Sprite" parent="."]
-position = Vector2( 8.3606, 127.743 )
+position = Vector2( -12, 63 )
 rotation = -0.174533
 scale = Vector2( 0.169753, 0.175694 )
 texture = ExtResource( 1 )

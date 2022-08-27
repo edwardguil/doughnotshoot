@@ -15,17 +15,17 @@ func MovePlayer(new_position, old_position, mouse_position):
 	
 func ShootGun(mouse_position):
 	$Weapon.FireWeaponDontSend(mouse_position)
-	
 
 func handle_animation(velocity, mouse_position) -> void:
 	if velocity.x != 0 or velocity.y != 0:
-		$anim.play("wobbledown")
+		$AnimationPlayer.play("walk")
 	else:
-		$anim.stop()
+		$AnimationPlayer.play("idle")
 		
 	if mouse_position.x < global_position.x:
-		$Frough.flip_h = true
+		$Sprite.flip_h = true
 		$Weapon.FlipSprite(true)
 	else:
-		$Frough.flip_h = false
+		$Sprite.flip_h = false
 		$Weapon.FlipSprite(false)
+	
