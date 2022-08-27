@@ -41,7 +41,7 @@ func UpdateWorldState(world_state):
 		world_state_buffer.append(world_state)
 			
 func _physics_process(delta):
-	var render_time = OS.get_ticks_msec()
+	var render_time = Server.client_clock - INTERPOLATION_OFFSET
 	if world_state_buffer.size() > 1:
 		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
 			world_state_buffer.remove(0)
