@@ -1,6 +1,6 @@
 extends Control
 
-
+var PLAYER_PATH = preload("res://Scenes/Support Scenes/Player.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,6 +12,7 @@ func _on_FindGame_pressed():
 
 func _on_TestGame_pressed():
 	get_tree().change_scene("res://Scenes/MainScenes/Level.tscn")
+
 
 func SetQueueStatus(new_status):
 	if new_status == 1:

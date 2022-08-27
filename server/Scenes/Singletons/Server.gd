@@ -24,12 +24,12 @@ func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
 	if get_node("Queue").IsInQueue(player_id):
 		get_node("Queue").RemoveFromQueue(player_id)
-		if (players_games.has(player_id)):
-			var gameId = players_games.get(player_id)
-			get_node(gameId).RemovePlayer(player_id)
-			players_games.erase(player_id)
-		if players_states.has(player_id):
-			players_states.erase(player_id)
+	if (players_games.has(player_id)):
+		var gameId = players_games.get(player_id)
+		get_node(gameId).RemovePlayer(player_id)
+		players_games.erase(player_id)
+	if players_states.has(player_id):
+		players_states.erase(player_id)
 
 remote func FetchServerTime(client_time):
 	var player_id = get_tree().get_rpc_sender_id()
