@@ -7,6 +7,7 @@ const INTERPOLATION_OFFSET = 100 # In milliseconds, default 100
 var world_state_buffer = []
 var last_world_state = 0
 var in_game = 0
+var players = []
 
 func NewGame():
 	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
@@ -18,7 +19,6 @@ func SpawnPlayers(players, positions):
 	yield(get_tree(), "idle_frame")
 	var new_player
 	for i in range(len(players)):
-		print(players[i])
 		var player_id = players[i]
 		var position = positions[i]
 		if get_tree().get_network_unique_id() == player_id:
@@ -28,6 +28,7 @@ func SpawnPlayers(players, positions):
 			#get_tree().get_current_scene().add_child(new_player, true)
 		else:
 			if not get_tree().get_current_scene().has_node(str(player_id)):
+				players.append(str(player_id))
 				new_player = ENEMY_PLAYER.instance()
 				new_player.name = str(player_id)
 				new_player.position = position
@@ -35,8 +36,8 @@ func SpawnPlayers(players, positions):
 
 func DespawnPlayers(player_id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	print(get_tree().get_current_scene().has_node(str(player_id)))
 	if get_tree().get_current_scene().has_node(str(player_id)):
+		players.remove(players.find(str(player_id)))
 		get_tree().get_current_scene().get_node(str(player_id)).queue_free()
 
 func UpdateWorldState(world_state):
@@ -85,5 +86,8 @@ func _physics_process(delta):
 func PerformShootAction(shoot_action):
 	for player in world_state_buffer[1]["Players"].keys():
 		if get_tree().get_current_scene().has_node(str(player)):
-			get_tree().get_current_scene().get_node(str(player)).ShootGun(shoot_action["R"])
+			get_tree().get_current_scene().get_node(str(player)).ShootGun(shoot_action["R"], player)
 	
+func AddAttack(shoot_action, enemy_player):
+	if get_tree().get_current_scene().has_node(str(enemy_player)):
+		get_tree().get_current_scene().get_node(str(enemy_player)).attack_dict[shoot_action["T"]] = shoot_action

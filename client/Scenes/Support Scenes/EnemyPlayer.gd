@@ -2,10 +2,15 @@ extends KinematicBody2D
 
 var SPEED = 600
 var velocity = Vector2(0, 0)
-var health = 3
-var max_health = 3
+var health = 2
+var max_health = 2
 var kills = 0
 var deaths = 0
+var attack_dict = {}
+
+func _physics_process(delta):
+	if not attack_dict == {}:
+		ShootGun2()
 
 func MovePlayer(new_position, old_position, mouse_position):
 	velocity = new_position - old_position
@@ -13,10 +18,16 @@ func MovePlayer(new_position, old_position, mouse_position):
 	handle_animation(velocity, mouse_position)
 	$Weapon.look_at(mouse_position)
 	
-func ShootGun(mouse_position):
-	$Weapon.FireWeaponDontSend(mouse_position)
+func ShootGun2():
+	for attack in attack_dict.keys():
+		if attack <= Server.client_clock:
+			MovePlayer(attack_dict[attack]['P'], global_position, attack_dict[attack]['R'])			
+			$Weapon.FireWeaponDontSend(attack_dict[attack]['R'], self.name)
+			attack_dict.erase(attack)
 	
-
+func ShootGun(mouse_position, player):
+	$Weapon.FireWeaponDontSend(mouse_position, player)
+	
 func handle_animation(velocity, mouse_position) -> void:
 	if velocity.x != 0 or velocity.y != 0:
 		$anim.play("wobbledown")
@@ -37,3 +48,7 @@ func handle_animation(velocity, mouse_position) -> void:
 			$Weapon.position.y = 10
 			$Weapon.position.x = 54
 		$Weapon.FlipSprite(false)
+
+func gotHit():
+	$HealthBar.reduce_health()
+		

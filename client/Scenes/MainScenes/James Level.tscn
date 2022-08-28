@@ -14,18 +14,15 @@ tile_data = PoolIntArray( -1245200, 2, 0, -1245198, 3, 0, -1245197, 3, 0, -12451
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Label" type="Label" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 12.0
-margin_top = 12.0
-margin_right = -841.0
-margin_bottom = -498.0
+margin_left = 8.0
+margin_top = 9.0
+margin_right = -845.0
+margin_bottom = -501.0
 text = "Health: 3
 Kills: 0
 Deaths: 0"
