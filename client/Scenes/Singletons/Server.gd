@@ -99,4 +99,10 @@ func SendRespawn(shoot_action):
 
 remote func ReceiveRespawn(respawn_action, player_id):
 	GameController.ReceiveRespawn(respawn_action, player_id)
+	
+func SendDeath(death_action):
+	rpc_id(1, "ReceiveDeath", death_action)
+
+remote func ReceiveDeath(death_action, player_id):
+	GameController.ReceiveDeath(death_action, player_id)
 

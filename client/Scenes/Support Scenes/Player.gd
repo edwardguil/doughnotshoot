@@ -60,19 +60,20 @@ func DefinePlayerState(mouse_position):
 	player_state = {"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position}
 	Server.SendPlayerState(player_state)
 	
-func gotHit():
+func gotHit(bullet_owner):
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
 		$CollisionShape2D2.set_deferred("disabled", true)
 		alive = false
-		health = max_health
 		deaths = deaths + 1
 		visible = false
+		Server.SendDeath({"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position, "K": bullet_owner})
 		get_tree().get_current_scene().get_node("CanvasLayer/DeathScreen").visible = true
 		
 func respawn():
 	$CollisionShape2D2.set_deferred("disabled", false)
+	health = max_health
 	$HealthBar.set_health()
 	alive = true
 	var rng = RandomNumberGenerator.new()
@@ -83,4 +84,5 @@ func respawn():
 	set_deferred("position", Vector2(x, y))
 	get_tree().get_current_scene().get_node("CanvasLayer/DeathScreen").set_deferred("visible", false)
 	Server.SendRespawn({"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position})
+	get_tree().get_current_scene().get_node("CanvasLayer/Label").updateLabel()
 	
