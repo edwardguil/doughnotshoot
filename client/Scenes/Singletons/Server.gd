@@ -93,3 +93,10 @@ func SendShootAction(shoot_action):
 remote func ReceiveShootAction(shoot_action, player_id):
 	GameController.AddAttack(shoot_action, player_id)
 	#GameController.PerformShootAction(shoot_action)
+	
+func SendRespawn(shoot_action):
+	rpc_id(1, "ReceiveRespawn", shoot_action)
+
+remote func ReceiveRespawn(respawn_action, player_id):
+	GameController.ReceiveRespawn(respawn_action, player_id)
+
