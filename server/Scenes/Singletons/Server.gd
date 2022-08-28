@@ -54,7 +54,7 @@ remote func ReceiveShootAction(shoot_action):
 		var gameId = players_games.get(player_id)
 		for player in get_node(gameId).players:
 			if player != player_id:
-				rpc_id(player, "ReceiveShootAction", shoot_action)
+				rpc_id(player, "ReceiveShootAction", shoot_action, player_id)
 
 func SetQueueStatus(player_id, status):
 	rpc_id(player_id, "SetQueueStatus", status)

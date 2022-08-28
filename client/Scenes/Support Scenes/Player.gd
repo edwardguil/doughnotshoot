@@ -4,10 +4,11 @@ var SPEED = 600
 var velocity = Vector2(0, 0)
 var mouse_position = Vector2(0, 0)
 var player_state = {}
-var health = 3
-var max_health = 3
+var health = 2
+var max_health = 2
 var kills = 0
 var deaths = 0
+var alive = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -16,21 +17,22 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta) -> void:
-	var x_input = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
-	var y_input = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
-	
-	velocity = Vector2(x_input, y_input).normalized()
-	mouse_position = get_global_mouse_position()
-	handle_animation(velocity, mouse_position)
-	$Weapon.look_at(mouse_position)
-	move_and_slide(velocity * SPEED)
-	
-	if Input.is_action_just_pressed("change_weapon"):
-		$Weapon.ChangeWeapon()
-	if Input.is_action_just_pressed("fire"):
-		$Weapon.FireWeapon(mouse_position)
+	if alive:
+		var x_input = int(Input.is_action_pressed("move_right")) - int(Input.is_action_pressed("move_left"))
+		var y_input = int(Input.is_action_pressed("move_down")) - int(Input.is_action_pressed("move_up"))
 		
-	DefinePlayerState(mouse_position)
+		velocity = Vector2(x_input, y_input).normalized()
+		mouse_position = get_global_mouse_position()
+		handle_animation(velocity, mouse_position)
+		$Weapon.look_at(mouse_position)
+		move_and_slide(velocity * SPEED)
+		
+		if Input.is_action_just_pressed("change_weapon"):
+			$Weapon.ChangeWeapon()
+		if Input.is_action_just_pressed("fire"):
+			$Weapon.FireWeapon(mouse_position)
+			
+		DefinePlayerState(mouse_position)
 	
 
 func handle_animation(velocity, mouse_position) -> void:
@@ -60,10 +62,13 @@ func DefinePlayerState(mouse_position):
 	
 func gotHit():
 	health = health - 1
+	$HealthBar.reduce_health()
 	if (health <= 0):
+		alive = false
 		health = max_health
 		deaths = deaths + 1
 		respawn()
+		alive = true
 		
 func respawn():
 	var rng = RandomNumberGenerator.new()

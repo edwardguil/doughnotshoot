@@ -11,7 +11,7 @@ func _ready():
 
 func fire(mouse_position):
 	if can_fire:
-		var shoot_action = {"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position}
+		var shoot_action = {"T": Server.client_clock, "P": get_global_position(), "R": mouse_position}
 		Server.SendShootAction(shoot_action)
 		can_fire = false
 		var bullet1 = BULLET_PATH.instance()

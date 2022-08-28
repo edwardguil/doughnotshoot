@@ -2,7 +2,8 @@ extends RigidBody2D
 
 var speed = 1500
 var damage = 25
-var lifetime = 1.5
+var lifetime = 3
+var bullet_owner = 0
 
 onready var initial_position = global_position
 
@@ -17,13 +18,18 @@ func SelfDestruct():
 	queue_free()
 
 func _on_character_body_entered(body):
-	print("hit something")
-	print(body)
-	print(body.name)
+	print("HIT: ", body.name)
+	print("PLAYERS: ", GameController.players)
+	print("Bullet Owner", bullet_owner)
+	print("Bool", str(bullet_owner) != str(body.name))
 	if body.name == "Player":
-		print("hit player")
-		body.gotHit()
-		get_tree().get_current_scene().get_node("CanvasLayer/Label").updateLabel()
-		self.hide()
+		if bullet_owner != get_tree().get_network_unique_id():
+			get_tree().get_current_scene().get_node("CanvasLayer/Label").updateLabel()
+			body.gotHit()
+			self.hide()
+	elif body.name in GameController.players:
+		if bullet_owner != body.name:
+			body.gotHit()
+			self.hide()
 	else:
 		self.hide()
