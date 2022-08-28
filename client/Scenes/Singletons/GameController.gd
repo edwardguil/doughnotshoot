@@ -91,3 +91,7 @@ func PerformShootAction(shoot_action):
 func AddAttack(shoot_action, enemy_player):
 	if get_tree().get_current_scene().has_node(str(enemy_player)):
 		get_tree().get_current_scene().get_node(str(enemy_player)).attack_dict[shoot_action["T"]] = shoot_action
+
+func ReceiveRespawn(respawn_action, enemy_player):
+	if get_tree().get_current_scene().has_node(str(enemy_player)):
+		get_tree().get_current_scene().get_node(str(enemy_player)).respawn(respawn_action["P"])
