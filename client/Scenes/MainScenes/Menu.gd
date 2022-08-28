@@ -8,7 +8,13 @@ func _ready():
 
 func _on_FindGame_pressed():
 	Server.JoinQueue()
-
+	$dough.hide()
+	$notWord.hide()
+	$shoot.hide()
+	$VBoxContainer.hide()
+	$AnimationPlayer.play("looking")
+	$looking.show()
+	
 
 func _on_TestGame_pressed():
 	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
