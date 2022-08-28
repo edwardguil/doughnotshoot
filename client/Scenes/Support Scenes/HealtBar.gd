@@ -17,12 +17,11 @@ func reduce_health():
 		current = current - 1
 		$Health2Anim.play("empty")
 
-func set_health(val):
-	if val == 3:
-		current = 3
-		$Health3Anim.play("full")
-		$Health2Anim.play("full")
-		$Health2Anim.play("full")
+func set_health():
+	current = 3
+	$Health3Anim.play("full")
+	$Health2Anim.play("full")
+	$Health2Anim.play("full")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):

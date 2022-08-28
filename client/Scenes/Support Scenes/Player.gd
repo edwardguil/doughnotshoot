@@ -4,8 +4,8 @@ var SPEED = 600
 var velocity = Vector2(0, 0)
 var mouse_position = Vector2(0, 0)
 var player_state = {}
-var health = 2
-var max_health = 2
+var health = 3
+var max_health = 3
 var kills = 0
 var deaths = 0
 var alive = true
@@ -64,10 +64,13 @@ func gotHit():
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
+		$CollisionShape2D2.disabled = true;
 		alive = false
 		health = max_health
 		deaths = deaths + 1
 		respawn()
+		$CollisionShape2D2.disabled = false
+		$HealthBar.set_health()
 		alive = true
 		
 func respawn():
