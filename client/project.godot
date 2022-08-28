@@ -22,6 +22,7 @@ GameController="*res://Scenes/Singletons/GameController.gd"
 [global]
 
 port=false
+dispay=false
 
 [input]
 
