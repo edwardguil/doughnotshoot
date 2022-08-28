@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scenes/Support Scenes/Weapon.gd" type="Script" id=1]
 [ext_resource path="res://Assests/Guns.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/Support Scenes/Gun1.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Support Scenes/Gun2.gd" type="Script" id=4]
 [ext_resource path="res://Assests/handgun.png" type="Texture" id=5]
+[ext_resource path="res://Assests/Sounds/Gun.wav" type="AudioStream" id=6]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -133,6 +134,9 @@ position = Vector2( 18, -6 )
 anims/RESET = SubResource( 2 )
 anims/fire = SubResource( 1 )
 anims/idle = SubResource( 6 )
+
+[node name="ShootSound" type="AudioStreamPlayer2D" parent="Gun1"]
+stream = ExtResource( 6 )
 
 [node name="Gun2" type="Node2D" parent="."]
 visible = false

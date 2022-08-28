@@ -53,6 +53,7 @@ func gotHit():
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
+		$Death.play(1.0)
 		visible = false
 		$CollisionShape2D2.disabled = true
 		

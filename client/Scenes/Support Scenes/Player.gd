@@ -64,6 +64,7 @@ func gotHit(bullet_owner):
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
+		$Death.play(1.0)
 		$CollisionShape2D2.set_deferred("disabled", true)
 		alive = false
 		deaths = deaths + 1

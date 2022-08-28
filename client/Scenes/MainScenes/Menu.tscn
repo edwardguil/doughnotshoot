@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/MainScenes/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Assests/Menu/play.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Assests/Menu/looking1.png" type="Texture" id=15]
 [ext_resource path="res://Assests/Menu/looking3.png" type="Texture" id=16]
 [ext_resource path="res://Assests/Menu/looking2.png" type="Texture" id=17]
+[ext_resource path="res://Assests/Sounds/Hackasong.wav" type="AudioStream" id=18]
 
 [sub_resource type="Animation" id=1]
 resource_name = "looking"
@@ -108,10 +109,15 @@ text = "Test Game"
 visible = false
 position = Vector2( 478, 293 )
 scale = Vector2( 0.595361, 0.595361 )
-texture = ExtResource( 17 )
+texture = ExtResource( 15 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/looking = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 18 )
+volume_db = -10.667
+autoplay = true
 
 [connection signal="focus_entered" from="VBoxContainer/FindGame" to="." method="_on_FindGame_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/FindGame" to="." method="_on_FindGame_pressed"]

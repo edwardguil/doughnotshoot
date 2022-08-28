@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Hackasong.wav-0b611a426337c206281ab0c0eb87dde1.sample"
+
+[deps]
+
+source_file="res://Assests/Sounds/Hackasong.wav"
+dest_files=[ "res://.import/Hackasong.wav-0b611a426337c206281ab0c0eb87dde1.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0
