@@ -17,7 +17,7 @@ func _on_FindGame_pressed():
 	
 
 func _on_TestGame_pressed():
-	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
+	get_tree().change_scene("res://Scenes/MainScenes/TestLevel.tscn")
 
 
 func SetQueueStatus(new_status):
