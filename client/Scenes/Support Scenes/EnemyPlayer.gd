@@ -63,4 +63,5 @@ func respawn(position):
 	visible = true
 	set_deferred("position", position)
 	
+	
 		

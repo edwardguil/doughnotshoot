@@ -95,3 +95,9 @@ func AddAttack(shoot_action, enemy_player):
 func ReceiveRespawn(respawn_action, enemy_player):
 	if get_tree().get_current_scene().has_node(str(enemy_player)):
 		get_tree().get_current_scene().get_node(str(enemy_player)).respawn(respawn_action["P"])
+		
+func ReceiveDeath(death_action, enemy_player):
+	print(str(death_action["K"]))
+	if get_tree().get_current_scene().has_node(str(death_action["K"])):
+		get_tree().get_current_scene().get_node(str(death_action["K"])).kills += 1
+		get_tree().get_current_scene().get_node("CanvasLayer/Label").updateLabel()

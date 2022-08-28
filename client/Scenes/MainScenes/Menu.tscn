@@ -55,7 +55,7 @@ margin_bottom = 1575.0
 rect_scale = Vector2( 0.176, 0.166 )
 
 [node name="FindGame" type="TextureButton" parent="VBoxContainer"]
-margin_right = 848.0
+margin_right = 1178.0
 margin_bottom = 395.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 9 )
