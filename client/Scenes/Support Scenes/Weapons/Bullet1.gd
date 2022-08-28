@@ -19,15 +19,15 @@ func SelfDestruct():
 
 func _on_character_body_entered(body):
 	print("HIT: ", body.name)
-	print("PLAYERS: ", GameController.players)
+	print("PLAYERS: ", GameController.player_list)
 	print("Bullet Owner", bullet_owner)
 	print("Bool", str(bullet_owner) != str(body.name))
 	if body.name == "Player":
-		if bullet_owner != get_tree().get_network_unique_id():
+		if bullet_owner != str(get_tree().get_network_unique_id()):
 			get_tree().get_current_scene().get_node("CanvasLayer/Label").updateLabel()
 			body.gotHit()
 			self.hide()
-	elif body.name in GameController.players:
+	elif body.name in GameController.player_list:
 		if bullet_owner != body.name:
 			body.gotHit()
 			self.hide()

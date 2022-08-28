@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 var SPEED = 600
 var velocity = Vector2(0, 0)
-var health = 2
-var max_health = 2
+var health = 3
+var max_health = 3
 var kills = 0
 var deaths = 0
 var attack_dict = {}
@@ -50,5 +50,12 @@ func handle_animation(velocity, mouse_position) -> void:
 		$Weapon.FlipSprite(false)
 
 func gotHit():
+	health = health - 1
 	$HealthBar.reduce_health()
+	if (health <= 0):
+		$CollisionShape2D2.disabled = true
+		health = max_health
+		$HealthBar.set_health()
+		$CollisionShape2D2.disabled = false
+	
 		
