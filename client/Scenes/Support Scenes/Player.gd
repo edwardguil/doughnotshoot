@@ -64,19 +64,23 @@ func gotHit():
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
-		$CollisionShape2D2.disabled = true;
+		$CollisionShape2D2.set_deferred("disabled", true)
 		alive = false
 		health = max_health
 		deaths = deaths + 1
-		respawn()
-		$CollisionShape2D2.disabled = false
-		$HealthBar.set_health()
-		alive = true
+		visible = false
+		get_tree().get_current_scene().get_node("CanvasLayer/DeathScreen").visible = true
 		
 func respawn():
+	$CollisionShape2D2.set_deferred("disabled", false)
+	$HealthBar.set_health()
+	alive = true
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var x = rng.randf_range(-450, 1500)
 	var y = rng.randf_range(-500, 1200)
-	position = Vector2(x, y)
+	set_deferred("visible", true)
+	set_deferred("position", Vector2(x, y))
+	get_tree().get_current_scene().get_node("CanvasLayer/DeathScreen").set_deferred("visible", false)
+	Server.SendRespawn({"T": OS.get_system_time_msecs(), "P": get_global_position(), "R": mouse_position})
 	

@@ -55,6 +55,22 @@ remote func ReceiveShootAction(shoot_action):
 		for player in get_node(gameId).players:
 			if player != player_id:
 				rpc_id(player, "ReceiveShootAction", shoot_action, player_id)
+	
+remote func ReceiveDeathCall(death):
+	var player_id = get_tree().get_rpc_sender_id()
+	if (players_games.has(player_id)):
+		var gameId = players_games.get(player_id)
+		for player in get_node(gameId).players:
+			if player != player_id:
+				rpc_id(player, "ReceiveShootAction", death, player_id)
+				
+remote func ReceiveRespawn(respawn_action):
+	var player_id = get_tree().get_rpc_sender_id()
+	if (players_games.has(player_id)):
+		var gameId = players_games.get(player_id)
+		for player in get_node(gameId).players:
+			if player != player_id:
+				rpc_id(player, "ReceiveRespawn", respawn_action, player_id)
 
 func SetQueueStatus(player_id, status):
 	rpc_id(player_id, "SetQueueStatus", status)

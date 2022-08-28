@@ -53,9 +53,14 @@ func gotHit():
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
+		visible = false
 		$CollisionShape2D2.disabled = true
-		health = max_health
-		$HealthBar.set_health()
-		$CollisionShape2D2.disabled = false
+		
+func respawn(position):
+	health = max_health
+	$HealthBar.set_health()
+	$CollisionShape2D2.disabled = false
+	visible = true
+	set_deferred("position", position)
 	
 		
