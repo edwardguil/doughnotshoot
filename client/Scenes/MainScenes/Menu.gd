@@ -4,6 +4,7 @@ var PLAYER_PATH = preload("res://Scenes/Support Scenes/Player.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AudioStreamPlayer.play()
 	pass # Replace with function body.
 
 func _on_FindGame_pressed():
@@ -17,7 +18,7 @@ func _on_FindGame_pressed():
 	
 
 func _on_TestGame_pressed():
-	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
+	get_tree().change_scene("res://Scenes/MainScenes/TestLevel.tscn")
 
 
 func SetQueueStatus(new_status):
