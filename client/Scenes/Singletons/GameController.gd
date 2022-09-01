@@ -10,7 +10,7 @@ var in_game = 0
 var player_list = []
 
 func NewGame():
-	get_tree().change_scene("res://Scenes/MainScenes/James Level.tscn")
+	get_tree().change_scene("res://Scenes/MainScenes/TestLevel.tscn")
 	print("New Game Started")
 
 

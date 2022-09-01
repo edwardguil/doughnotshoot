@@ -64,6 +64,7 @@ func gotHit(bullet_owner):
 	health = health - 1
 	$HealthBar.reduce_health()
 	if (health <= 0):
+		$Death.play(1.0)
 		$CollisionShape2D2.set_deferred("disabled", true)
 		alive = false
 		deaths = deaths + 1
@@ -78,8 +79,8 @@ func respawn():
 	alive = true
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
-	var x = rng.randf_range(-450, 1500)
-	var y = rng.randf_range(-500, 1200)
+	var x = rng.randf_range(0, 900)
+	var y = rng.randf_range(0, 900)
 	set_deferred("visible", true)
 	set_deferred("position", Vector2(x, y))
 	get_tree().get_current_scene().get_node("CanvasLayer/DeathScreen").set_deferred("visible", false)

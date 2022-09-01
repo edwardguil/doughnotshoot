@@ -116,7 +116,6 @@ anims/looking = SubResource( 1 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 18 )
-autoplay = true
 
 [connection signal="focus_entered" from="VBoxContainer/FindGame" to="." method="_on_FindGame_focus_entered"]
 [connection signal="pressed" from="VBoxContainer/FindGame" to="." method="_on_FindGame_pressed"]
