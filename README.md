@@ -1,6 +1,6 @@
 # Dough Not Shoot - A Multiplayer Game!
 
-Dough Not Shoot is a friendly multiplayer game. All the assets were hand crafted from playdough, keyed, then mapped into the game. It was was built for the 2 day 2022 UQCS Hackathon and ended up winning the [Best Design Award.](https://uqcs.org/showcase/). The game can be played [here](https://drawde96.itch.io/dough-not-shoot), although there is no guarantee anyone else will be playing with you! 
+Dough Not Shoot is a friendly multiplayer game. All the assets were hand crafted from playdough, keyed, then mapped into the game. It was was built for the 2 day 2022 UQCS Hackathon and ended up winning the [Best Design Award.](https://uqcs.org/showcase/). The game can be played [here](https://drawde96.itch.io/dough-not-shoot), then by clicking test game.
 
 #### The Game
 
@@ -27,7 +27,7 @@ Each player controls a 'frog', equiped with a gun and a health bar. There is no 
 
 ##### The Dedicated Server
 
-Clients communicate through a dedicated server via a delpoyment in AWS EC2. It is possible to also run the server locally.
+Clients communicate through a dedicated server via a delpoyment in AWS EC2 (no longer available, load balancing costs too much). It is possible to also run the server locally.
 
 ### Installation
 
